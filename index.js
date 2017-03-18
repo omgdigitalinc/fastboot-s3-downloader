@@ -99,7 +99,7 @@ class S3Downloader {
   unzipApp() {
     let zipPath = this.zipPath;
 
-    return this.exec('unzip ' + zipPath)
+    return this.exec('unzip ' + zipPath + ' -d ' + this.outputPath)
       .then(() => {
         this.ui.writeLine("unzipped " + zipPath);
       });
@@ -128,6 +128,9 @@ class S3Downloader {
 
 function outputPathFor(zipPath) {
   let name = path.basename(zipPath, '.zip');
+  if (name.indexOf('-') === -1) {
+    return name;
+  }
 
   // Remove MD5 hash
   return name.split('-').slice(0, -1).join('-');
