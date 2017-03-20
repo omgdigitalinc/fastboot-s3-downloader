@@ -99,7 +99,7 @@ class S3Downloader {
   unzipApp() {
     let zipPath = this.zipPath;
 
-    return this.exec('unzip ' + zipPath + ' -d ' + this.outputPath)
+    return this.exec('unzip ' + zipPath)
       .then(() => {
         this.ui.writeLine("unzipped " + zipPath);
       });
